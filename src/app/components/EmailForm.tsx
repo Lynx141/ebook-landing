@@ -30,6 +30,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   } catch (err) {
     console.error(err);
     setStatus('idle');
+    alert('Something went wrong. Try again.');
   }
 };
 
