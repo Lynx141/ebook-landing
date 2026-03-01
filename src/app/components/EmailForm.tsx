@@ -11,15 +11,27 @@ export const EmailForm: React.FC<EmailFormProps> = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    
-    setStatus('loading');
-    setTimeout(() => {
-      setStatus('success');
-    }, 1500);
-  };
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (!email) return;
+
+  setStatus('loading');
+
+  try {
+    const res = await fetch('/api/brevo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+
+    if (!res.ok) throw new Error('Failed to add email');
+
+    setStatus('success');
+  } catch (err) {
+    console.error(err);
+    setStatus('idle');
+  }
+};
 
   if (!isOpen) return null;
 
