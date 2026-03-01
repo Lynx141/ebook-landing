@@ -1,9 +1,31 @@
+
+
+
+
+
+
+
+
+
+
+
+import { useEffect } from "react";
+
 export default function BrevoForm() {
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://sibforms.com/forms/end-form/build/main.js";
+    script.defer = true;
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <div
       dangerouslySetInnerHTML={{
-        __html: `
-       <div class="sib-form" style="text-align: center;
+        __html:`
+        
+<div class="sib-form" style="text-align: center;
          background-color: #EFF2F7;                                 ">
   <div id="sib-form-container" class="sib-form-container">
     <div id="error-message" class="sib-form-message-panel" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;max-width:540px;">
@@ -78,8 +100,8 @@ export default function BrevoForm() {
     </div>
   </div>
 </div>
-        `
-      }}
+        
+      `}}
     />
   );
 }
