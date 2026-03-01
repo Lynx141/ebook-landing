@@ -8,10 +8,10 @@ export default function BrevoForm() {
     script.defer = true;
 
     script.onload = () => {
-      (window as any).initSibForms &&
-      (window as any).initSibForms();
+      setTimeout(() => {
+        (window as any).initSibForms && (window as any).initSibForms();
+      }, 500);
     };
-
     document.body.appendChild(script);
   }, []);
 
